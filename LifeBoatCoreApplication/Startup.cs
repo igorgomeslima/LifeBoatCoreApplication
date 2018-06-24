@@ -23,39 +23,41 @@ namespace LifeBoatCoreApplication
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDefaultResponse defaultResponse, ILogger<Startup> logger)
         {
-            //if (env.IsDevelopment())
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            else
+                app.UseExceptionHandler();
+
+            //app.Use(next =>
             //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            //    return async context =>
+            //    {
+            //        logger.LogInformation("1-Request arriving");
+            //        if (context.Request.Path.StartsWithSegments("/cmf"))
+            //        {
+            //            await context.Response.WriteAsync("Custom Middleware Func<>!");
+            //            logger.LogInformation("2-Request fired.");
+            //            logger.LogInformation("3-Response with custom Middleware!");
+            //        }
+            //        else
+            //        {
+            //            await next(context);
+            //            logger.LogInformation("3-Response without custom Middleware!");
+            //        }
+            //    };
+            //});
 
-            app.Use(next =>
-            {
-                return async context =>
-                {
-                    logger.LogInformation("1-Request arriving");
-                    if (context.Request.Path.StartsWithSegments("/cmf"))
-                    {
-                        await context.Response.WriteAsync("Custom Middleware Func<>!");
-                        logger.LogInformation("2-Request fired.");
-                        logger.LogInformation("3-Response with custom Middleware!");
-                    }
-                    else
-                    {
-                        await next(context);
-                        logger.LogInformation("3-Response without custom Middleware!");
-                    }
-                };
-            });
-
-            app.UseWelcomePage(new WelcomePageOptions {
-                Path = "/welcome"
-            });
+            //app.UseWelcomePage(new WelcomePageOptions {
+            //    Path = "/welcome"
+            //});
 
             app.Run(async (context) =>
             {
+                ///throw new Exception();
                 //var defaultResponseMessage = defaultResponse.GetDefaultReponseHardCoded();
                 var defaultResponseMessage = defaultResponse.GetDefaultResponse();
-                await context.Response.WriteAsync(defaultResponseMessage);
+                await context.Response.WriteAsync($"{defaultResponseMessage}");
+                //await context.Response.WriteAsync($"{defaultResponseMessage} [{env.EnvironmentName}]");
             });
         }
     }
