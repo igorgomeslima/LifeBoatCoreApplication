@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace LifeBoatCoreApplication
 {
@@ -20,12 +21,35 @@ namespace LifeBoatCoreApplication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDefaultResponse defaultResponse)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDefaultResponse defaultResponse, ILogger<Startup> logger)
         {
-            if (env.IsDevelopment())
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            app.Use(next =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                return async context =>
+                {
+                    logger.LogInformation("1-Request arriving");
+                    if (context.Request.Path.StartsWithSegments("/cmf"))
+                    {
+                        await context.Response.WriteAsync("Custom Middleware Func<>!");
+                        logger.LogInformation("2-Request fired.");
+                        logger.LogInformation("3-Response with custom Middleware!");
+                    }
+                    else
+                    {
+                        await next(context);
+                        logger.LogInformation("3-Response without custom Middleware!");
+                    }
+                };
+            });
+
+            app.UseWelcomePage(new WelcomePageOptions {
+                Path = "/welcome"
+            });
 
             app.Run(async (context) =>
             {
