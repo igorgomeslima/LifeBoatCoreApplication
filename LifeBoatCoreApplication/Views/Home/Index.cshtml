@@ -1,12 +1,22 @@
-﻿@model LifeBoatCoreApplication.Models.Restaurant
+﻿@*@model LifeBoatCoreApplication.Models.Restaurant*@
+@model IEnumerable<LifeBoatCoreApplication.Models.Restaurant>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
-    <h1>@Model.Id</h1>
-    <div>@Model.Name</div>
+    @*<h1>@Model.Id</h1>
+    <div>@Model.Name</div>*@
+    <table>
+       @foreach (var restaurant in Model)
+       {
+            <tr>
+                <td>@restaurant.Id</td>
+                <td>@restaurant.Name</td>
+            </tr>
+       }
+    </table>
 </body>
 </html>
 

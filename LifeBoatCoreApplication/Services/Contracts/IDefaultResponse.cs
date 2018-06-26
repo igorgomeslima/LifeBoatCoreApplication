@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace LifeBoatCoreApplication
+namespace LifeBoatCoreApplication.Services.Contracts
 {
     public interface IDefaultResponse
     {
