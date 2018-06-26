@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -34,7 +35,8 @@ namespace LifeBoatCoreApplication
             //app.UseFileServer();
             app.UseStaticFiles();
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(ConfigureRoutes);
 
             //app.Use(next =>
             //{
@@ -61,12 +63,19 @@ namespace LifeBoatCoreApplication
 
             app.Run(async (context) =>
             {
-                ///throw new Exception();
+                //throw new Exception();
                 //var defaultResponseMessage = defaultResponse.GetDefaultReponseHardCoded();
-                var defaultResponseMessage = defaultResponse.GetDefaultResponse();
+                //var defaultResponseMessage = defaultResponse.GetDefaultResponse();
+                var defaultResponseMessage = "NotFound!";
+                context.Response.ContentType = "text/plain";
                 await context.Response.WriteAsync($"{defaultResponseMessage}");
                 //await context.Response.WriteAsync($"{defaultResponseMessage} [{env.EnvironmentName}]");
             });
+        }
+
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}"); 
         }
     }
 }
