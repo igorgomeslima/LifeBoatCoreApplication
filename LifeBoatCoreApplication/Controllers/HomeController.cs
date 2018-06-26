@@ -9,7 +9,9 @@ namespace LifeBoatCoreApplication.Controllers
         {
             //return Content("Default controller message!");
             var model = new Restaurant { Id = 1, Name = "Restoran 1" };
-            return new ObjectResult(model);
+            //return new ObjectResult(model);
+            //return View();
+            return View(model);
         }
     }
 }
