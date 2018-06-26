@@ -18,6 +18,7 @@ namespace LifeBoatCoreApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDefaultResponse, DefaultResponse>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,9 +31,10 @@ namespace LifeBoatCoreApplication
 
             //app.UseDefaultFiles();
             //app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string>() { "boat.html" } });
-            //app.UseStaticFiles();
+            //app.UseFileServer();
+            app.UseStaticFiles();
 
-            app.UseFileServer();
+            app.UseMvcWithDefaultRoute();
 
             //app.Use(next =>
             //{
