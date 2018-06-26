@@ -38,6 +38,7 @@ namespace LifeBoatCoreApplication
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(ConfigureRoutes);
 
+            //Custom Middleware
             //app.Use(next =>
             //{
             //    return async context =>
