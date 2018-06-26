@@ -34,7 +34,7 @@ namespace LifeBoatCoreApplication
             //app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string>() { "boat.html" } });
             //app.UseFileServer();
             app.UseStaticFiles();
-
+            
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(ConfigureRoutes);
 
