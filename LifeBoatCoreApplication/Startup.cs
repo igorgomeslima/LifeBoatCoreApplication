@@ -28,6 +28,12 @@ namespace LifeBoatCoreApplication
             else
                 app.UseExceptionHandler();
 
+            //app.UseDefaultFiles();
+            //app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string>() { "boat.html" } });
+            //app.UseStaticFiles();
+
+            app.UseFileServer();
+
             //app.Use(next =>
             //{
             //    return async context =>
