@@ -1,13 +1,13 @@
 ﻿using LifeBoatCoreApplication.Models;
 using LifeBoatCoreApplication.Services.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LifeBoatCoreApplication.Services.Implementations
 {
     public class InMemoryRestaurantData : IRestaurantData
     {
         List<Restaurant> _restaurants;
-
         public InMemoryRestaurantData()
         {
             _restaurants = new List<Restaurant>
@@ -22,6 +22,11 @@ namespace LifeBoatCoreApplication.Services.Implementations
         public IEnumerable<Restaurant> GetAll()
         {
             return _restaurants;
+        }
+
+        public Restaurant Get(int id)
+        {
+            return _restaurants.FirstOrDefault(w => w.Id.Equals(id));
         }
     }
 }

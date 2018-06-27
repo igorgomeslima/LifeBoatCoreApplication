@@ -26,5 +26,11 @@ namespace LifeBoatCoreApplication.Controllers
             model.DefaultMessage = _defaultResponse.GetDefaultResponse();
             return View(model);
         }
+
+        public IActionResult Details(int id)
+        {
+            var model = _restaurantData.Get(id);
+            return View(model);
+        }
     }
 }
