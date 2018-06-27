@@ -17,13 +17,14 @@
                 <td>@restaurant.Id</td>
                 <td>@restaurant.Name</td>
                 <td>
-                    <a href="/home/details/@restaurant.Id">Details</a>
-                    @Html.ActionLink("Show more information", "Details", new { id = restaurant.Id })
+                    @*<a href="/home/details/@restaurant.Id">Details</a>
+                    @Html.ActionLink("Show more information", "Details", new { id = restaurant.Id })*@
                     <a asp-action="Details" asp-route-id="@restaurant.Id">More</a>
                 </td>
             </tr>
        }
     </table>
+    <a asp-action="Create">Create Restaurant</a>
 </body>
 </html>
 
