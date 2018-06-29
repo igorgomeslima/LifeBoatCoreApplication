@@ -44,17 +44,25 @@ namespace LifeBoatCoreApplication.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(RestaurantEditDTO model)
         {
-            var newRestaurant = new Restaurant
+            if (ModelState.IsValid)
             {
-                Name = model.Name,
-                CuisineType = model.CuisineType
-            };
+                var newRestaurant = new Restaurant
+                {
+                    Name = model.Name,
+                    CuisineType = model.CuisineType
+                };
 
-            newRestaurant = _restaurantData.Add(newRestaurant);
-            return RedirectToAction(nameof(Details), new { Id = newRestaurant.Id });
-            //return View("Details", newRestaurant);
+                newRestaurant = _restaurantData.Add(newRestaurant);
+                return RedirectToAction(nameof(Details), new { Id = newRestaurant.Id });
+                //return View("Details", newRestaurant);
+            }
+            else
+            {
+                return View();
+            }
         }
 
     }
