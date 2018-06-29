@@ -1,5 +1,7 @@
-﻿@model LifeBoatCoreApplication.Models.Restaurant
+﻿@using LifeBoatCoreApplication.Models
+@model Restaurant
 
 <h1>@Model.Name</h1>
-<div>... More details ...</div>
+<div>Id: @Model.Id</div>
+<div>Cuisine Type: @Model.CuisineType</div>
 <a asp-action="Index" asp-controller="Home">Back to Home Page</a>

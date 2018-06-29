@@ -28,5 +28,12 @@ namespace LifeBoatCoreApplication.Services.Implementations
         {
             return _restaurants.FirstOrDefault(w => w.Id.Equals(id));
         }
+
+        public Restaurant Add(Restaurant restaurant)
+        {
+            restaurant.Id = _restaurants.Max(m => m.Id) + 1;
+            _restaurants.Add(restaurant);
+            return restaurant;
+        }
     }
 }

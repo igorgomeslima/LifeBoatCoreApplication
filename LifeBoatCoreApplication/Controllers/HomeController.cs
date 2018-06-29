@@ -37,9 +37,24 @@ namespace LifeBoatCoreApplication.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(RestaurantEditDTO model)
+        {
+            var newRestaurant = new Restaurant
+            {
+                Name = model.Name,
+                CuisineType = model.CuisineType
+            };
+
+            newRestaurant = _restaurantData.Add(newRestaurant);
+
+            return View("Details", newRestaurant);
         }
 
     }

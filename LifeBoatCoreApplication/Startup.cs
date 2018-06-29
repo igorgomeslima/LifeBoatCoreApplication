@@ -16,7 +16,8 @@ namespace LifeBoatCoreApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDefaultResponse, DefaultResponse>();
-            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
+            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            //services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
             services.AddMvc();
         }
 

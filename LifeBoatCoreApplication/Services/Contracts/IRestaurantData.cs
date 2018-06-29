@@ -11,5 +11,6 @@ namespace LifeBoatCoreApplication.Services.Contracts
     {
         IEnumerable<Restaurant> GetAll();
         Restaurant Get(int id);
+        Restaurant Add(Restaurant restaurant);
     }
 }
