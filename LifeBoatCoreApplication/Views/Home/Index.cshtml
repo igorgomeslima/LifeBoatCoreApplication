@@ -1,30 +1,34 @@
 ﻿@*@model LifeBoatCoreApplication.Models.Restaurant
-@model IEnumerable<LifeBoatCoreApplication.Models.Restaurant>*@
+    @model IEnumerable<LifeBoatCoreApplication.Models.Restaurant>*@
 @model LifeBoatCoreApplication.DTOs.Home.HomeIndexDTO
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-    @*<h1>@Model.Id</h1>
+@*<h1>@Model.Id</h1>
     <div>@Model.Name</div>*@
-    <h1>@Model.DefaultMessage</h1>
-    <table>
-       @foreach (var restaurant in Model.Restaurants)
-       {
-            <tr>
-                <td>@restaurant.Id</td>
-                <td>@restaurant.Name</td>
-                <td>
-                    @*<a href="/home/details/@restaurant.Id">Details</a>
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>All Restaurants</h1>
+<table>
+    @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>@restaurant.Id</td>
+            <td>@restaurant.Name</td>
+            <td>
+                @*<a href="/home/details/@restaurant.Id">Details</a>
                     @Html.ActionLink("Show more information", "Details", new { id = restaurant.Id })*@
-                    <a asp-action="Details" asp-route-id="@restaurant.Id">More</a>
-                </td>
-            </tr>
-       }
-    </table>
-    <a asp-action="Create">Create Restaurant</a>
-</body>
-</html>
+                <a asp-action="Details" asp-route-id="@restaurant.Id">More</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="Create">Create Restaurant</a>
+
+@section footer{
+<p>Default message: </p> @Model.DefaultMessage
+}
+
+
 
