@@ -1,0 +1,9 @@
+﻿#General CLI Commands#
+dotnet ef dbcontext list
+dotnet ef dbcontext info
+##
+
+#Create Database#
+dotnet ef migrations add InitialCreate -v
+dotnet ef database update -v
+##

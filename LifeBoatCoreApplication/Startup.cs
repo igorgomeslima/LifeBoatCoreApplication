@@ -91,7 +91,5 @@ namespace LifeBoatCoreApplication
         {
             routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}"); 
         }
-
-        private Action Configuration() => 
     }
 }
