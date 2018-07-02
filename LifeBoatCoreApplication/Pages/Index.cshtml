@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Index Razor Page";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+<h1>All Restaurants</h1>
+<table>
+    @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>@restaurant.Id</td>
+            <td>@restaurant.Name</td>
+            <td>
+                @*<a href="/home/details/@restaurant.Id">Details</a>
+                    @Html.ActionLink("Show more information", "Details", new { id = restaurant.Id })*@
+                <a asp-action="Details" asp-route-id="@restaurant.Id">More</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="Create">Create Restaurant</a>
+
+@section footer{
+    <p>Footer Razor Page</p>
+}
+
